@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toggle Password Visibility</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <!-- Include Alpine.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+</head>
+
+<body x-data="{ passwordVisible: false }" class="bg-gray-900 text-gray-200">
+    <div class="flex items-center justify-center h-screen">
+        <form method="post" x-on:submit.prevent class="bg-blue-900 p-6 rounded shadow-md">
+            <p class="mb-5">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" class="pr-10 text-black">
+            </p>
+            <!-- relative: Sets the position of the paragraph to relative, which is necessary for absolute positioning of child elements. -->
+            <p class="mb-5 relative">
+                <label for="password">Password:</label>
+                <!-- pr-10: Adds padding to the right of the input to prevent the text from overlapping with the icon. -->
+                <input x-bind:type="passwordVisible ? 'text' : 'password'" name="password" id="password" class="pr-10 text-black" />
+                
+                <!-- absolute: Positions the span absolutely relative to the nearest positioned ancestor (in this case, the paragraph). -->
+                <!-- right-2: Positions the span 0.5rem from the right edge of the paragraph. -->
+                <!-- top-1/2, transform -translate-y-1/2: Centers the span vertically within the paragraph.  -->
+                <span @click="passwordVisible = !passwordVisible" class="cursor-pointer absolute right-2 top-1/2 transform -translate-y-1/2">
+                    <svg x-show="!passwordVisible" xmlns="http://www.w3.org/2000/svg"
+                        class="icon icon-tabler icon-tabler-eye text-white" width="24" height="24" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                        <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                    </svg>
+                    <svg x-show="passwordVisible" xmlns="http://www.w3.org/2000/svg"
+                        class="icon icon-tabler icon-tabler-eye-off text-white" width="24" height="24" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M10.585 10.587a2 2 0 0 0 2.829 2.828" />
+                        <path
+                            d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87" />
+                        <path d="M3 3l18 18" />
+                    </svg>
+                </span>
+            </p>
+            <button type="submit" id="submit" class="submit">Log In</button>
+        </form>
+    </div>
+</body>
+
+</html>
